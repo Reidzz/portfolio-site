@@ -1,0 +1,155 @@
+@use "./defaults";
+@use "./variables" as v;
+
+body {
+    background: v.$newBgColour;
+    font-family: v.$mainFont;
+    @include defaults.margin-default;
+    overflow-x: hidden;
+}
+
+.overlay {
+    background: v.$newBgColour;
+    z-index: 1000;
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    left: 0;
+    @include defaults.flex;
+    align-items: center;
+    transition: opacity 1s ease-in-out;
+    font-size: v.$navFontSize;
+    font-family: v.$navFont;
+    opacity: 1;
+}
+
+.overlay-logo {
+    position: absolute;
+    top: 50%;
+    /*padding-top: 0.6em;
+    font-size: v.$navFontSize;*/
+    color: v.$fontColour;
+    transition: top 1s ease-in-out;
+    /*width: 50px;
+    height: 50px;*/
+    // This nesting is causing issues with the logo transition
+}
+
+.svg-logo {
+    width: 150px;
+    height: 150px;
+}
+
+.move {
+    top: 0;
+    padding-top: 0.4em;
+    padding-right: 0.1em;
+}
+
+.reveal {
+    opacity: 0;
+    z-index: 0;
+}
+
+.overflow {
+    overflow: hidden;
+}
+
+.body-wrapper {
+    margin-top: 10em;
+}
+
+nav {
+    color: v.$fontColour;
+    font-size: v.$navFontSize;
+    overflow: hidden;
+    margin-bottom: 4em;
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    padding-top: 0.6em;
+    font-family: v.$navFont;
+    background: v.$newBgColour;
+    @include defaults.margin-default;
+    @include defaults.flex;
+    justify-content: space-evenly;
+    a {
+        padding: 0 0.4em;
+        text-decoration: none;
+        color: v.$fontColour;
+        transition: background 0.4s ease-in-out;
+    }
+    a:hover {
+        background: black;
+        transform: scale(1, 1);
+    }
+}
+
+.title-container {
+    max-width: 500px;
+    margin-bottom: 6em;
+    @include defaults.media-queries;
+    .title {
+        color: v.$fontColour;
+        font-family: v.$headerFont;
+        letter-spacing: 0.05em;
+        font-size: 2em;
+        text-transform: uppercase;
+        margin-bottom: 0.5em;
+    }
+    p {
+        color: v.$fontColour;
+        font-size: 1.2em;
+    }
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5em;
+    margin-bottom: 6em;
+    @include defaults.media-queries;
+    .image {
+        //background: v.$secondaryColour;
+        //padding: 2em;
+        border: 1px solid white;
+        z-index: 10;
+    }
+    img {
+        width: 100%;
+        height: auto;
+        //min-height: 300px;
+        object-fit: cover;
+    }
+}
+
+.about-container {
+    @include defaults.media-queries;
+}
+
+.about-section {
+    @extend .title-container;
+    max-width: 950px;
+    background: v.$secBgColour;
+    padding: 2em;
+    position: relative;
+}
+
+.container-layer {
+    background: v.$layerBgColour;
+    position: absolute;
+    top: -5px;
+    //left: 10px;
+    z-index: -1;
+    width: 100%;
+    max-width: 925px;
+    //min-height: 220px;
+    height: auto;
+    padding: 2em;
+    p {
+        color: white;
+    }
+    // Need to figure out how to make this layers height be the same 
+    // with the container above when screen changes dimensions
+}
